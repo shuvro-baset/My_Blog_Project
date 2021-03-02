@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, View, TemplateView, DeleteView
 from App_Blog.models import Blog, Comment, Likes
 from django.urls import reverse, reverse_lazy
@@ -23,7 +23,7 @@ class CreateBlog(LoginRequiredMixin, CreateView):
         title = blog_obj.blog_title
         blog_obj.slug = title.replace(" ", "-") + "-" + str(uuid.uuid4())
         blog_obj.save()
-        return HttpResponseRedirect(reverse('index'))
+        return redirect('App_Blog:blog_list')
 
 class BlogList(ListView):
     context_object_name = 'blogs'

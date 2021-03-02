@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import HttpResponseRedirect
@@ -30,7 +30,7 @@ def login_page(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('index'))
+                return redirect('App_Blog:blog_list')
     return render(request, 'App_Login/login.html', context={'form':form})
 
 @login_required
