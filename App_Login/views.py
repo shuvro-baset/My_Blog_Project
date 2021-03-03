@@ -30,13 +30,13 @@ def login_page(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('App_Blog:blog_list')
+                return redirect('App_Login:profile')
     return render(request, 'App_Login/login.html', context={'form':form})
 
 @login_required
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(reverse('App_Blog:blog_list'))
 
 @login_required
 def profile(request):
